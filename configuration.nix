@@ -47,7 +47,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -77,6 +77,8 @@
     ];
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -84,6 +86,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
   wget
   neovim
   home-manager
@@ -91,11 +94,18 @@
   tmux
   ripgrep
   fzf
-  blender
+  blender	
+  gnumake
+  gcc
+  xclip
+  unzip
+
+  postgresql
   docker
+  inetutils
   ];
 
-  # virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -108,11 +118,11 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
-  #networking.firewall.allowedTCPPorts = [53];
-  #networking.firewall.allowedUDPPorts = [53];
+  networking.firewall.allowedTCPPorts = [ ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 
